@@ -26,7 +26,7 @@ var app = express.createServer(express.logger());
 						res.writeHead(404); res.end(); } 
 					}); 
 				} 
-				}).listen(8000);
+				});
 
 function getFile(localPath, mimeType, res){
 	fs.readFile(localPath, function(err, contents){
