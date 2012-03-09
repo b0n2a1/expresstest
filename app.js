@@ -23,7 +23,7 @@ var app = express.createServer(express.logger());
 					if (exists) { 
 						getFile(localPath, extensions[ext], res); 
 					} else { 
-						res.writeHead(404); res.end(); } 
+						res.writeHead(500); res.end(); } 
 					}); 
 				} 
 				});
