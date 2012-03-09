@@ -12,10 +12,10 @@ var http = require("http"),
 var app = require('express').createServer();
 
 app.get('/', function(request, response) {
-	writecontent();
+	writecontent(request, response);
 });
 
-function writecontent(){
+function writecontent(request, response){
   response.send('Hello World!');
 }
 
