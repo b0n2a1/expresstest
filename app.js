@@ -20,3 +20,20 @@ function writecontent(request, response){
 }
 
 app.listen(process.env.PORT || 3000);
+
+
+
+function getFile(localPath, mimeType, res){
+	fs.readFile(localPath, function(err, contents){
+		if(!err){
+			res.writeHead(200,{
+				"Content-Type": mimeType,
+				"Content-Length": contents.length
+			});
+			res.end(contents);
+		}else{
+			res.writeHead(500);
+			res.end();
+		}
+	});
+}
