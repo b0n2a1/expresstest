@@ -13,7 +13,10 @@ app.get('/', function(req,res){
 	util.pump(streamIn, res);
 });
 
-
+app.get('/twit/', function(req,res){
+	var twitstream = "This is a json stream";
+	res.json(twitstream);
+})
 
 app.listen(process.env.PORT || 3000);
 
