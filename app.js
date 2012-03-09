@@ -12,9 +12,9 @@ var http = require("http"),
 var app = require('express').createServer();
 
 app.get('/', function(request, response) {
-	var filename = path.basename(req.url) || "index.html", 
+	var filename = path.basename(request.url) || "index.html", 
 	ext = path.extname(filename),
-	dir = path.dirname(req.url).substring(1),
+	dir = path.dirname(request.url).substring(1),
 	localPath = __dirname + "/public/";
 	
 	writecontent(request, response);
