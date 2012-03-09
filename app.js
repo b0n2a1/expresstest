@@ -16,8 +16,19 @@ app.get('/', function(request, response) {
 	ext = path.extname(filename),
 	dir = path.dirname(request.url).substring(1),
 	localPath = __dirname + "/public/";
-	
-	writecontent(request, response);
+
+
+	if (extensions[ext]) { 
+		localPath += (dir ? dir + "/" : "") + filename; 
+		path.exists(localPath, function(exists) { 
+				if (exists) { 
+					getFile(localPath, extensions[ext], response); 
+				} else { 
+					response.writeHead(404); response.end(); } 
+				}); 
+			}
+			
+//	writecontent(request, response);
 });
 
 function writecontent(request, response){
