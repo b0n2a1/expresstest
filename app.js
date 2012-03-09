@@ -1,55 +1,21 @@
-var http = require("http"), 
-	querystring = require("querystring"),
-	path = require("path"), 
-	fs = require("fs")
-	extensions = {".html": "text/html",
-	".css": "text/css",
-	".js": "application/javascript",
-	".png": "image/png",
-	".gif": "image/gif",
-	".jpg": "image/jpeg"
-	};
-var app = require('express').createServer();
+var express = require('express');
+var fs = require('fs');
+var util = require('util');
 
-app.get('/', function(request, response) {
-	var filename = path.basename(request.url) || "index.html", 
-	ext = path.extname(filename),
-	dir = path.dirname(request.url).substring(1),
-	localPath = __dirname + "/public/";
-
-
-	if (extensions[ext]) { 
-		localPath += (dir ? dir + "/" : "") + filename; 
-		path.exists(localPath, function(exists) { 
-				if (exists) { 
-					getFile(localPath, extensions[ext], response); 
-				} else { 
-					response.writeHead(404); response.end(); } 
-				}); 
-			}
-			
-//	writecontent(request, response);
+var app = express.createServer();
+app.configure('development', function(){
+	app.use(express.logger());
+	app.use(express.static(__dirname + '/public'));
 });
 
-function writecontent(request, response){
-  response.send('Hello World!');
-}
+app.get('/', function(req,res){
+	var streamIn = fs.createReadStream(__dirname + '/public/index.html');
+	util.pump(streamIn, res);
+});
+
+
 
 app.listen(process.env.PORT || 3000);
 
 
 
-function getFile(localPath, mimeType, res){
-	fs.readFile(localPath, function(err, contents){
-		if(!err){
-			res.writeHead(200,{
-				"Content-Type": mimeType,
-				"Content-Length": contents.length
-			});
-			res.end(contents);
-		}else{
-			res.writeHead(500);
-			res.end();
-		}
-	});
-}
