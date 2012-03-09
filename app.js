@@ -12,7 +12,7 @@ var http = require("http"),
 	};
 var app = express.createServer(express.logger());
 
-	http.createServer(function(req, res) { 
+	app.get(function(req, res) { 
 		var filename = path.basename(req.url) || "index.html", 
 		ext = path.extname(filename),
 		dir = path.dirname(req.url).substring(1),
