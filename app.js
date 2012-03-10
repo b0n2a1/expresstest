@@ -1,4 +1,4 @@
-var sys = require("sys"),
+var util = require("util"),
 	http = require("http"),
 	url = require("url"),
 	path = require("path"),
@@ -81,4 +81,4 @@ http.createServer(function(request, response){
 	}
 }).listen(process.env.PORT || 3000);
 
-sys.puts("Server running tweet test.");
+util.puts("Server running tweet test.");
