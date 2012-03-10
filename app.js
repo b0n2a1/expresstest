@@ -1,6 +1,7 @@
 var express = require('express');
 var fs = require('fs');
 var util = require('util');
+var http = require('http');
 
 var app = express.createServer();
 app.configure('development', function(){
@@ -15,9 +16,7 @@ app.get('/', function(req,res){
 
 app.get('/twit/', function(req,res){
 	var twitstream = getTweets();//"This is a json stream";
-	
-	
-	
+		
 	res.json(twitstream);
 });
 
