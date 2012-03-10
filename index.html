@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>Node Tweet
+	<script src="public/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="public/jquery-ui-1.8.18.custom.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	<script src="public/jquery-ui-1.8.18.custom.min.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="public/site.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	</head>
+	<body>
+		<ul id="tweets">
+		<script type="text/javascript">
+			var tweet_list = $("tweets");
+			
+			function load_tweets(){
+				$.getJSON("/stream", function(tweets){
+					$.each(tweets, function(){
+						$("<li>").html(this.text).prependTo(tweet_list);
+					});
+					load_tweets();
+				});
+			}
+			
+			setTimeout(load_tweets,1000);
+		</script>
+		</ul>
+	</body>
+</html>
