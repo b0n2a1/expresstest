@@ -2,10 +2,28 @@
 <html>
 	<head>
 		<title>Hello World</title>
+		<link rel="stylesheet" href="jquery-ui-1.8.18.custom.css" type="text/css" media="screen" title="no title" charset="utf-8">
+		
 		<link rel="stylesheet" href="site.css" type="text/css" media="screen" title="no title" charset="utf-8">
+		<script src="jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="jquery-ui-1.8.18.custom.min.js" type="text/javascript" charset="utf-8"></script>
+
 	</head>
 	<body>
 		<h1>Hello, World -- all new</h1>
-		<h2><a href="http://empty-moon-7259.herokuapp.com/twit/">Get Twit</a></h2>
+		<h2><a onclick="gettwit();">Get Twit</a></h2>
+		<div id="twithere"></div>
+		<script type="text/javascript">
+			function gettwit(){
+				$.ajax({
+					url:"http://empty-moon-7259.herokuapp.com/twit/",
+					type:'GET',
+					success: function(jsondata){
+						$("#twithere").text(jsondata); 
+					}
+				});
+			}
+		</script>
+	
 	</body>
 </html>
