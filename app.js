@@ -36,7 +36,7 @@ function getTweets(){
 		method: "GET",
 		path: "/search.json?q=b0n2a1"
 	})
-	return jSON.parse(body);
+	return JSON.parse(body);
 //	.on("response", function(response){
 //		var body = "";
 //		response.on("data", function(data){
