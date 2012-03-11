@@ -50,7 +50,7 @@ function get_tweets(){
 			}
 		});		
 	});
-	request.close();
+	request.end();
 }
 
 setInterval(get_tweets,5000);
