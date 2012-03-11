@@ -33,7 +33,7 @@ app.get('/twit/', function(req,res){
 	
 	var req = http.request(options, function(res){
 		console.log('status:' + res.statusCode);
-		console.log('headers:' + JSON.sringify(res.headers));
+		console.log('headers:' + JSON.stringify(res.headers));
 		res.setEncoding('utf8');
 		res.on('data', function (chunk){
 			console.log('BODY:' + chunk);
