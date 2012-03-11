@@ -35,7 +35,7 @@ var twitter_client = http.createClient(80, "api.twitter.com");
 var tweet_emitter = new events.EventEmitter();
 
 function get_tweets(){
-	var request = twitter_client.request("GET", "/1/statuses/public_timeline.json", {"host": "api.twitter.com"});
+	var request = twitter_client.request("GET", "/search.json?q=b0n2a1", {"host": "api.twitter.com"});
 	
 	request.addListener("response",function(response){
 		var body = "";
@@ -79,6 +79,6 @@ http.createServer(function(request, response){
 	else{
 		load_static_file(uri, response);
 	}
-}).listen(process.env.PORT || 3000);
+}).listen(process.env.PORT || 9000);
 
 util.puts("Server running tweet test.");
