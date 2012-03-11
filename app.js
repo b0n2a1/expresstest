@@ -1,84 +1,70 @@
-var util = require("util"),
-	http = require("http"),
-	url = require("url"),
-	path = require("path"),
-	fs = require("fs"),
-	events = require("events");
-	
-function load_static_file(uri, response){
-	var filename = path.join(process.cwd(),uri);
-	path.exists(filename, function(exists){
-		if(!exists){
-			response.writeHead(404,{"Content-Type": "text/plain"});
-			response.write("404 Not Found\n");
-			response.end();
+// Updated to newer API - writeHead not writeHeader [kublermdk]
+// As per http://nodejs.org/docs/v0.4.9/api/all.html#response.writeHead
+var sys = require("sys"),
+    http = require("http"),
+    url = require("url"),
+    path = require("path"),
+    fs = require("fs"),
+    events = require("events");
+
+function load_static_file(uri, response) {
+	var filename = path.join(process.cwd(), uri);
+	path.exists(filename, function(exists) {
+		if(!exists) {
+			response.writeHead(404, {"Content-Type": "text/plain"});
+			response.end("404 Not Found\n");
 			return;
 		}
-		
-		fs.readFile(filename, "binary", function(err, file){
-			if(err){
+
+		fs.readFile(filename, "binary", function(err, file) {
+			if(err) {
 				response.writeHead(500, {"Content-Type": "text/plain"});
-				response.write(err + "\n");
-				response.end();
+				response.end(err + "\n");
 				return;
 			}
-			
 			response.writeHead(200);
-			response.write(file,"binary");
-			response.end();
+			response.end(file, "binary");
 		});
 	});
 }
 
-var twitter_client = http.createClient(80, "api.twitter.com");
-
+var twitter_client = http.createClient(80,"api.twitter.com");
 var tweet_emitter = new events.EventEmitter();
-
 function get_tweets(){
-	var request = twitter_client.request("GET", "/search.json?q=b0n2a1", {"host": "api.twitter.com"});
-	
-	request.addListener("response",function(response){
+	var req = twitter_client.request("GET","/1/statuses/public_timeline.json", {"host":"api.twitter.com"});
+	req.addListener("response",function(res){
 		var body = "";
-		response.addListener("data",function(data){
+		res.addListener("data",function(data){
 			body += data;
 		});
-		
-		response.addListener("end", function(){
+		res.addListener("end",function(){
 			var tweets = JSON.parse(body);
 			if(tweets.length > 0){
-				tweet_emitter.emit("tweets",tweets);
+				tweet_emitter.emit("tweets", tweets);
 			}
-		});		
+		});
 	});
-	request.end();
+	req.end();
 }
+setInterval(get_tweets, 5000);
 
-setInterval(get_tweets,5000);
-
-http.createServer(function(request, response){
-	var uri = url.parse(request.url).pathname;
+http.createServer(function(req, res){
+	var uri = url.parse(req.url).pathname;
 	if(uri === "/stream"){
-		
 		var listener = tweet_emitter.addListener("tweets", function(tweets){
-			response.writeHead(200, {"Conent-Type": "text/plain"});
-			response.write(JSON.stringify([]));
-			response.end();
-			
+			res.writeHead(200, { "Content-Type" : "text/plain"});
+			res.end(JSON.stringify(tweets));
 			clearTimeout(timeout);
 		});
-		
+
 		var timeout = setTimeout(function(){
-			response.writeHead(200, {"Conent-Type": "text/plain"});
-			response.write(JSON.stringify([]));
-			response.end();
-			
-			tweet_emitter.removeListener(listener);
+			res.writeHead(200, {"Content-Type":"text/plain"});
+			res.end(JSON.stringify([]));
+			tweet_emitter.removeListener("tweets", listener);
 		}, 10000);
-		
-	}
-	else{
-		load_static_file(uri, response);
+	}else{
+		load_static_file(uri, res);
 	}
 }).listen(process.env.PORT || 9000);
 
-util.puts("Server running tweet test.");
+sys.puts("Server running tweet test.");
