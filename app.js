@@ -14,14 +14,17 @@ app.get('/', function(req,res){
 	util.pump(streamIn, res);
 });
 
+//app.get('/twit/', function(req,res){
+//	var twitstream = JSON.stringify(getTweets());
+//		
+//	res.json(twitstream);
+//});
+
+function getTwit(){
+	
+}
+
 app.get('/twit/', function(req,res){
-	var twitstream = JSON.stringify(getTweets());
-		
-	res.json(twitstream);
-});
-
-
-function getTweets(){
 	var request = http.request({
 		host: "search.twitter.com",
 		method: "GET",
