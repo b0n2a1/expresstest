@@ -20,20 +20,17 @@ app.get('/', function(req,res){
 //	res.json(twitstream);
 //});
 
-function getTwit(){
-	
-}
 
-app.get('/twit/', function(req,res){
-	var request = http.request({
-		host: "search.twitter.com",
-		method: "GET",
-		path: "/search.json?q=b0n2a1"
-	})
-	return JSON.parse(request);
-}
+//app.get('/twit/', function(req,res){
+//	var request = http.request({
+//		host: "search.twitter.com",
+//		method: "GET",
+//		path: "/search.json?q=b0n2a1"
+//	})
+//	return JSON.parse(request);
+//}
 
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 3333);
 
 
 
