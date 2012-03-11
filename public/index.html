@@ -20,7 +20,10 @@
 					type:'GET',
 					success: function(jsondata){
 						$("#twithere").text(jsondata); 
-					}
+					},
+					error: function(jqXHR, textStatus, errorThrown) {
+						$("#twithere").text('error ' + textStatus + " " + errorThrown);
+				    }
 				});
 			}
 		</script>
