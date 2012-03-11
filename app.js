@@ -1,6 +1,6 @@
 // Updated to newer API - writeHead not writeHeader [kublermdk]
 // As per http://nodejs.org/docs/v0.4.9/api/all.html#response.writeHead
-var sys = require("sys"),
+var util = require("util"),
     http = require("http"),
     url = require("url"),
     path = require("path"),
@@ -67,4 +67,4 @@ http.createServer(function(req, res){
 	}
 }).listen(process.env.PORT || 9000);
 
-sys.puts("Server running tweet test.");
+util.puts("Server running tweet test.");
