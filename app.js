@@ -31,7 +31,7 @@ app.get('/twit/', function(req,res){
 		path: "/search.json?q=b0n2a1"	
 	}
 	
-	var req = http.request(options, function(res){
+	var req = http.get(options, function(res){
 		console.log('status:' + res.statusCode);
 		console.log('headers:' + JSON.stringify(res.headers));
 		res.setEncoding('utf8');
