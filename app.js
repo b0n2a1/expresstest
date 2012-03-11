@@ -11,7 +11,7 @@ function load_static_file(uri, response){
 		if(!exists){
 			response.writeHead(404,{"Content-Type": "text/plain"});
 			response.write("404 Not Found\n");
-			response.close();
+			response.end();
 			return;
 		}
 		
@@ -19,13 +19,13 @@ function load_static_file(uri, response){
 			if(err){
 				response.writeHead(500, {"Content-Type": "text/plain"});
 				response.write(err + "\n");
-				response.close();
+				response.end();
 				return;
 			}
 			
 			response.writeHead(200);
 			response.write(file,"binary");
-			response.close();
+			response.end();
 		});
 	});
 }
@@ -62,7 +62,7 @@ http.createServer(function(request, response){
 		var listener = tweet_emitter.addListener("tweets", function(tweets){
 			response.writeHead(200, {"Conent-Type": "text/plain"});
 			response.write(JSON.stringify([]));
-			response.close();
+			response.end();
 			
 			clearTimeout(timeout);
 		});
@@ -70,7 +70,7 @@ http.createServer(function(request, response){
 		var timeout = setTimeout(function(){
 			response.writeHead(200, {"Conent-Type": "text/plain"});
 			response.write(JSON.stringify([]));
-			response.close();
+			response.end();
 			
 			tweet_emitter.removeListener(listener);
 		}, 10000);
