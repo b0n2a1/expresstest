@@ -15,19 +15,17 @@ app.get('/', function(req,res){
 });
 
 app.get('/twit/', function(req,res){
-	var twitstream = JSON.stringify(getTweets());
-	//getTweets();//"This is a json stream";
-		
-	res.json(twitstream);
+//	var twitstream = JSON.stringify(getTweets());
+//	//getTweets();//"This is a json stream";		
+//	res.json(twitstream);
+	
+	var request = http.request({
+		host: "search.twitter.com",
+		method: "GET",
+		path: "/search.json?q=b0n2a1"
+	})
+	//return JSON.parse(request);
 });
-
-//var Twitter = (function(){
-//	var eventEmitter = new events.EventEmitter();
-//	return{
-//		EventEmitter : eventEmitter,
-//		latestTweet: 0
-//	};
-//})();
 
 function getTweets(){
 	var request = http.request({
@@ -35,24 +33,7 @@ function getTweets(){
 		method: "GET",
 		path: "/search.json?q=b0n2a1"
 	})
-	return JSON.parse(request);
-//	.on("response", function(response){
-//		var body = "";
-//		response.on("data", function(data){
-//			body += data;
-//			try{
-//				var tweets = jSON.parse(body);
-//				if(tweets.results.length > 0){
-//					Twitter.latestTweet = tweets.max_id_str;
-//					Twitter.EventEmitter.emit("tweets",tweets);
-//				}
-//				catch (ex){
-//					console.log("Waiting for more data chunks");
-//				}
-//			}
-//		});
-//	});
-	
+	return JSON.parse(request);	
 }
 
 app.listen(process.env.PORT || 3000);
