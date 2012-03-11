@@ -19,17 +19,35 @@ app.get('/twit/', function(req,res){
 //	//getTweets();//"This is a json stream";		
 //	res.json(twitstream);
 	
-	var request = http.request({
+//	var request = http.request({
+//		host: "search.twitter.com",
+//		method: "GET",
+//		path: "/search.json?q=b0n2a1"
+//	})
+	//return JSON.parse(request);
+	var options = {
 		host: "search.twitter.com",
 		method: "GET",
-		path: "/search.json?q=b0n2a1"
-	})
-	//return JSON.parse(request);
+		path: "/search.json?q=b0n2a1"	
+	}
+	
+	var req = http.request(options, function(res){
+		console.log('status:' + res.statusCode);
+		console.log('headers:' + JSON.sringify(res.headers));
+		res.setEncoding('utf8');
+		res.on('data', function (chunk){
+			console.log('BODY:' + chunk);
+		});
+	});
+	req.write('data\n');
+	req.write('data\n');
+	req.end();
+
 });
 
 function getTweets(){
 	var request = http.request({
-		host: "search.twitter.com",
+		host: "http://search.twitter.com",
 		method: "GET",
 		path: "/search.json?q=b0n2a1"
 	})
