@@ -15,7 +15,7 @@ var t = new twitter({
 var app = express.createServer();
 app.configure('development', function(){
 	app.use(express.logger());
-	app.use(express.static(__dirname + '/public'));
+//	app.use(express.static(__dirname + '/public'));
 });
 
 app.get('/', function(req,res){
