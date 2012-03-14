@@ -28,8 +28,9 @@ t.search('nodejs OR #node', function(err, data) {
     console.log('Twitter search failed!');
   }
   else {
-    console.log('Search results:');
-    console.dir(data);
+    //console.log('Search results:');
+    //console.dir(data);
+	response.write(data);
   }
 });
 
