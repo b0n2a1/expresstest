@@ -12,17 +12,25 @@ var t = new twitter({
     access_token_secret: credentials.access_token_secret
 });
 
-	t.stream(
-	    'statuses/filter',
-	    { track: ['@b0n2a1', '@szich', '@darrylhan','bonsai','wow'] },
-	    function(stream) {
-	        stream.on('data', function(tweet) {
+//	t.stream(
+//	    'statuses/filter',
+//	    { track: ['@b0n2a1', '@szich', '@darrylhan','bonsai','wow'] },
+//	    function(stream) {
+//	        stream.on('data', function(tweet) {
 //	            console.log(tweet.text);
-				response.write(JSON.stringify(tweet.text));
-	        });
-	    }
-	);
+//				response.write(JSON.stringify(tweet.text));
+//	        });
+//	    }
+//	);
 
-
+t.search('nodejs OR #node', function(err, data) {
+  if (err) {
+    console.log('Twitter search failed!');
+  }
+  else {
+    console.log('Search results:');
+    console.dir(data);
+  }
+});
 
 
