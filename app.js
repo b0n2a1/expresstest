@@ -1,60 +1,28 @@
-var express = require('express');
-var fs = require('fs');
-var util = require('util');
-var http = require('http');
+var twitter = require('ntwitter');
+var credentials = require('./credentials.js');
 
-var app = express.createServer();
-app.configure('development', function(){
-	app.use(express.logger());
-	app.use(express.static(__dirname + '/public'));
+var t = new twitter({
+    consumer_key: credentials.consumer_key,
+    consumer_secret: credentials.consumer_secret,
+    access_token_key: credentials.access_token_key,
+    access_token_secret: credentials.access_token_secret
 });
+
 
 app.get('/', function(req,res){
-	var streamIn = fs.createReadStream(__dirname + '/public/index.html');
-	util.pump(streamIn, res);
+//	var streamIn = fs.createReadStream(__dirname + '/public/index.html');
+	util.pump(twitstream, res);
 });
 
-app.get('/twit/', function(req,res){
-//	var twitstream = JSON.stringify(getTweets());
-//	//getTweets();//"This is a json stream";		
-//	res.json(twitstream);
-	
-//	var request = http.request({
-//		host: "search.twitter.com",
-//		method: "GET",
-//		path: "/search.json?q=b0n2a1"
-//	})
-	//return JSON.parse(request);
-	var options = {
-		host: "search.twitter.com",
-		method: "GET",
-		path: "/search.json?q=b0n2a1"	
-	}
-	
-	var req = http.get(options, function(res){
-		console.log('status:' + res.statusCode);
-		console.log('headers:' + JSON.stringify(res.headers));
-		res.setEncoding('utf8');
-		res.on('data', function (chunk){
-			console.log('BODY:' + chunk);
-		});
-	});
-	req.write('data\n');
-	req.write('data\n');
-	req.end();
-
-});
-
-function getTweets(){
-	var request = http.request({
-		host: "http://search.twitter.com",
-		method: "GET",
-		path: "/search.json?q=b0n2a1"
-	})
-	return JSON.parse(request);	
+function twitstream(){
+t.stream(
+    'statuses/filter',
+    { track: ['@b0n2a1', '@szich', '@darrylhan'] },
+    function(stream) {
+        stream.on('data', function(tweet) {
+            //console.log(tweet.text);
+			return(tweet.text);
+        });
+    }
+);
 }
-
-app.listen(process.env.PORT || 3000);
-
-
-
