@@ -12,24 +12,17 @@ var t = new twitter({
     access_token_secret: credentials.access_token_secret
 });
 
-var app = express.createServer();
-app.configure('development', function(){
-	app.use(express.logger());
-//	app.use(express.static(__dirname + '/public'));
-});
-
-app.get('/', function(req,res){
 	t.stream(
 	    'statuses/filter',
-	    { track: ['@b0n2a1', '@szich', '@darrylhan'] },
+	    { track: ['@b0n2a1', '@szich', '@darrylhan','bonsai','wow'] },
 	    function(stream) {
 	        stream.on('data', function(tweet) {
-	            //console.log(tweet.text);
-				res.write(tweet.text);
+//	            console.log(tweet.text);
+				response.write(JSON.stringify(tweet.text));
 	        });
 	    }
 	);
-});
-app.listen(process.env.PORT || 3333);
+
+
 
 
