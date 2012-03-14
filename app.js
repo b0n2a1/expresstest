@@ -8,6 +8,11 @@ var t = new twitter({
     access_token_secret: credentials.access_token_secret
 });
 
+var app = express.createServer();
+app.configure('development', function(){
+	app.use(express.logger());
+	app.use(express.static(__dirname + '/public'));
+});
 
 app.get('/', function(req,res){
 //	var streamIn = fs.createReadStream(__dirname + '/public/index.html');
