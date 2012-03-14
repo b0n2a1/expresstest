@@ -19,20 +19,17 @@ app.configure('development', function(){
 });
 
 app.get('/', function(req,res){
-//	var streamIn = fs.createReadStream(__dirname + '/public/index.html');
-	util.pump(twitstream, res);
+	t.stream(
+	    'statuses/filter',
+	    { track: ['@b0n2a1', '@szich', '@darrylhan'] },
+	    function(stream) {
+	        stream.on('data', function(tweet) {
+	            //console.log(tweet.text);
+				res.write(tweet.text);
+	        });
+	    }
+	);
 });
-
-function twitstream(){
-t.stream(
-    'statuses/filter',
-    { track: ['@b0n2a1', '@szich', '@darrylhan'] },
-    function(stream) {
-        stream.on('data', function(tweet) {
-            //console.log(tweet.text);
-			return(tweet.text);
-        });
-    }
-);
-}
 app.listen(process.env.PORT || 3333);
+
+
