@@ -17,8 +17,8 @@ var t = new twitter({
 	    { track: ['@b0n2a1', '@szich', '@darrylhan','bonsai','wow'] },
 	    function(stream) {
 	        stream.on('data', function(tweet) {
-	            console.log(tweet.text);
-//				response.write(JSON.stringify(tweet.text));
+//	            console.log(tweet.text);
+				response.write(JSON.stringify(tweet.text));
 	        });
 	    }
 	);
