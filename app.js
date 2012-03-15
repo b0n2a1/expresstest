@@ -25,10 +25,10 @@ app.get('/', function(req,res){
 
 app.get('/twit/', function(req,res){
 	//return JSON.parse(request);
-//	var options = {
-//		host: "search.twitter.com",
-//		method: "GET",
-//		path: "/search.json?q=b0n2a1"	
+	var options = {
+		host: "search.twitter.com",
+		method: "GET",
+		path: "/search.json?q=b0n2a1"	
 	}
 	
 	var req = http.get(options, function(res){
