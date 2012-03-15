@@ -29,17 +29,6 @@ app.get('/twit/', function(req,res){
 //		host: "search.twitter.com",
 //		method: "GET",
 //		path: "/search.json?q=b0n2a1"	
-		t.search('@b0n2a1 OR #poulsbo', function(err, data) {
-		  if (err) {
-		    console.log('Twitter search failed!');
-		  }
-		  else {
-		    //console.log('Search results:');
-		    //console.dir(data);
-		//		JSON.stringify(data);
-			req.write(data);
-		  }
-		});
 	}
 	
 	var req = http.get(options, function(res){
