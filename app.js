@@ -23,14 +23,14 @@ var t = new twitter({
 //	    }
 //	);
 
-t.search('nodejs OR #node', function(err, data) {
+t.search('@b0n2a1 OR #poulsbo', function(err, data) {
   if (err) {
     console.log('Twitter search failed!');
   }
   else {
-    //console.log('Search results:');
-    //console.dir(data);
-	response.write(data);
+    console.log('Search results:');
+    console.dir(data);
+//	response.write(data);
   }
 });
 
