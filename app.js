@@ -1,3 +1,5 @@
+var twitter = require('ntwitter');
+var credentials = require('./credentials.js');
 var express = require('express');
 var fs = require('fs');
 var util = require('util');
@@ -15,15 +17,6 @@ app.get('/', function(req,res){
 });
 
 app.get('/twit/', function(req,res){
-//	var twitstream = JSON.stringify(getTweets());
-//	//getTweets();//"This is a json stream";		
-//	res.json(twitstream);
-	
-//	var request = http.request({
-//		host: "search.twitter.com",
-//		method: "GET",
-//		path: "/search.json?q=b0n2a1"
-//	})
 	//return JSON.parse(request);
 	var options = {
 		host: "search.twitter.com",
