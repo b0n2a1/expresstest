@@ -42,17 +42,17 @@ app.get('/twit/', function(req,res){
 //	req.write('data\n');
 //	req.write('data\n');
 //	req.end();
-	req.write('Hello');
-	t.search('@b0n2a1 OR #poulsbo', function(err, data) {
-	  if (err) {
-	    console.log('Twitter search failed!');
-	  } else {
-	    //console.log('Search results:');
-	    //console.dir(data);
-			JSON.stringify(data);
-	//	response.write(data);
-	  }
-	});
+	res.write('Hello');
+//	t.search('@b0n2a1 OR #poulsbo', function(err, data) {
+//	  if (err) {
+//	    console.log('Twitter search failed!');
+//	  } else {
+//	    //console.log('Search results:');
+//	    //console.dir(data);
+//			JSON.stringify(data);
+//	//	response.write(data);
+//	  }
+//	});
 	
 });
 
