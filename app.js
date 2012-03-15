@@ -24,6 +24,9 @@ app.get('/', function(req,res){
 });
 
 app.get('/twit/', function(req,res){
+	
+	res.json("Hello");
+	
 	//return JSON.parse(request);
 //	var options = {
 //		host: "search.twitter.com",
@@ -43,7 +46,6 @@ app.get('/twit/', function(req,res){
 //	req.write('data\n');
 //	req.end();
 
-	util.pump(JSON.stringify('hello'),res);
 //	t.search('@b0n2a1 OR #poulsbo', function(err, data) {
 //	  if (err) {
 //	    console.log('Twitter search failed!');
