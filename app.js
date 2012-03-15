@@ -23,19 +23,16 @@ app.get('/', function(req,res){
 	util.pump(streamIn, res);
 });
 
-app.get('/twit/', function(req,res){
-
-	t.search('@b0n2a1 OR #poulsbo', function(err, data) {
+app.get('/twit/', searchparam, function(req,res){
+	t.search(searchparam, function(err, data) {
 	  if (err) {
 	    console.log('Twitter search failed!');
 	  } else {
 	    console.log('Search results:');
 	    console.dir(data);
 		res.json(JSON.stringify(data));
-			
 	  }
 	});
-	
 });
 
 app.listen(process.env.PORT || 3000);
