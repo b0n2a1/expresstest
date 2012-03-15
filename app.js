@@ -50,10 +50,10 @@ app.get('/twit/', function(req,res){
 	  if (err) {
 	    console.log('Twitter search failed!');
 	  } else {
-	    //console.log('Search results:');
-	    //console.dir(data);
-			res.json(data);
-	//	response.write(data);
+	    console.log('Search results:');
+	    console.dir(data);
+		res.json(data);
+			
 	  }
 	});
 	
