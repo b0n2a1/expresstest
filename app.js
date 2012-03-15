@@ -23,7 +23,8 @@ app.get('/', function(req,res){
 	util.pump(streamIn, res);
 });
 
-app.get('/twit/', searchparam, function(req,res){
+app.get('/twit/:searchparam', function(req,res){
+	var searchparam = req.params.searchparam;
 	t.search(searchparam, function(err, data) {
 	  if (err) {
 	    console.log('Twitter search failed!');
