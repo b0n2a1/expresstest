@@ -5,6 +5,13 @@ var fs = require('fs');
 var util = require('util');
 var http = require('http');
 
+var t = new twitter({
+    consumer_key: credentials.consumer_key,
+    consumer_secret: credentials.consumer_secret,
+    access_token_key: credentials.access_token_key,
+    access_token_secret: credentials.access_token_secret
+});
+
 var app = express.createServer();
 app.configure('development', function(){
 	app.use(express.logger());
