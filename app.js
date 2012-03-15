@@ -37,7 +37,7 @@ app.get('/twit/', function(req,res){
 		    //console.log('Search results:');
 		    //console.dir(data);
 		//		JSON.stringify(data);
-			response.write(data);
+			req.write(data);
 		  }
 		});
 	}
