@@ -25,15 +25,15 @@ app.get('/', function(req,res){
 
 app.get('/twit/', function(req,res){
 	//return JSON.parse(request);
-	var options = {
-		host: "search.twitter.com",
-		method: "GET",
-		path: "/search.json?q=b0n2a1"	
-	}
+//	var options = {
+//		host: "search.twitter.com",
+//		method: "GET",
+//		path: "/search.json?q=b0n2a1"	
+//	}
 	
 	var req = http.get(options, function(res){
-		console.log('status:' + res.statusCode);
-		console.log('headers:' + JSON.stringify(res.headers));
+	//	console.log('status:' + res.statusCode);
+	//	console.log('headers:' + JSON.stringify(res.headers));
 		res.setEncoding('utf8');
 		res.on('data', function (chunk){
 			console.log('BODY:' + chunk);
