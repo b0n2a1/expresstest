@@ -52,7 +52,7 @@ app.get('/twit/', function(req,res){
 	  } else {
 	    console.log('Search results:');
 	    console.dir(data);
-		res.json(data);
+		res.json(JSON.stringify(data));
 			
 	  }
 	});
