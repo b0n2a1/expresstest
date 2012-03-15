@@ -24,27 +24,6 @@ app.get('/', function(req,res){
 });
 
 app.get('/twit/', function(req,res){
-	
-	
-	
-	//return JSON.parse(request);
-//	var options = {
-//		host: "search.twitter.com",
-//		method: "GET",
-//		path: "/search.json?q=b0n2a1"	
-//	}
-	
-//	var req = http.get(options, function(res){
-//	//	console.log('status:' + res.statusCode);
-//	//	console.log('headers:' + JSON.stringify(res.headers));
-//		res.setEncoding('utf8');
-//		res.on('data', function (chunk){
-//			console.log('BODY:' + chunk);
-//		});
-//	});
-//	req.write('data\n');
-//	req.write('data\n');
-//	req.end();
 
 	t.search('@b0n2a1 OR #poulsbo', function(err, data) {
 	  if (err) {
@@ -58,26 +37,6 @@ app.get('/twit/', function(req,res){
 	});
 	
 });
-
-t.search('@b0n2a1 OR #poulsbo', function(err, data) {
-  if (err) {
-    console.log('Twitter search failed!');
-  } else {
-    //console.log('Search results:');
-    //console.dir(data);
-		JSON.stringify(data);
-//	response.write(data);
-  }
-});
-
-//function getTweets(){
-//	var request = http.request({
-//		host: "http://search.twitter.com",
-//		method: "GET",
-//		path: "/search.json?q=b0n2a1"
-//	})
-//	return JSON.parse(request);	
-//}
 
 app.listen(process.env.PORT || 3000);
 
