@@ -28,8 +28,9 @@ t.search('@b0n2a1 OR #poulsbo', function(err, data) {
     console.log('Twitter search failed!');
   }
   else {
-    console.log('Search results:');
-    console.dir(data);
+    //console.log('Search results:');
+    //console.dir(data);
+	JSON.stringify(data);
 //	response.write(data);
   }
 });
