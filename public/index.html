@@ -11,12 +11,14 @@
 	</head>
 	<body>
 		<h1>Hello, World -- all new</h1>
-		<h2><a onclick="gettwit();">Get Twit</a></h2>
+		<input type="text" value="" id="searchval">
+		<h2><a onclick="gettwit();">Search</a></h2>
 		<div id="twithere"></div>
 		<script type="text/javascript">
 			function gettwit(){
+				var searchval = $("#searchval").val();
 				$.ajax({
-					url:"http://empty-moon-7259.herokuapp.com/twit/Poulsbo",
+					url:"http://empty-moon-7259.herokuapp.com/twit/" + searchval,
 					type:'GET',
 					success: function(jsondata){
 						$("#twithere").text(jsondata); 
