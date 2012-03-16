@@ -21,8 +21,8 @@
 					url:"http://empty-moon-7259.herokuapp.com/twit/" + searchval,
 					type:'GET',
 					success: function(jsondata){
-						//$("#twithere").text(jsondata); 
-						printjson(jsondata);
+						$("#twithere").text(jsondata); 
+						//printjson(jsondata);
 					},
 					error: function(jqXHR, textStatus, errorThrown) {
 						$("#twithere").text('error ' + textStatus + " " + errorThrown);
