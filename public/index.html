@@ -21,13 +21,30 @@
 					url:"http://empty-moon-7259.herokuapp.com/twit/" + searchval,
 					type:'GET',
 					success: function(jsondata){
-						$("#twithere").text(jsondata); 
+						//$("#twithere").text(jsondata); 
+						printjson(jsondata);
 					},
 					error: function(jqXHR, textStatus, errorThrown) {
 						$("#twithere").text('error ' + textStatus + " " + errorThrown);
 				    }
 				});
 			}
+			
+			function printjson(jsondata){
+				var jd = $.parseJSON(jsondata)
+				var items = [];
+
+				$.each(data, function(key, val) {
+					items.push('<li id="' + key + '">' + val + '</li>');
+				});
+
+				$('<ul/>', {
+					'class': 'my-new-list',
+					html: items.join('')
+				}).appendTo('#twithere');
+			}
+			
+			
 		</script>
 	
 	</body>
